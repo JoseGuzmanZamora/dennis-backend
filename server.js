@@ -1,11 +1,13 @@
-const express = require('express');
+import express from "express";
+import service from "./Main/open-service.js";
 
 const app = express();
+app.use(express.json())   
 
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.post('/completion', (req, res) => {
+  service(req.body.pass, req.body.prompt, res);
 })
 
 app.listen(port, () => {
