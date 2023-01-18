@@ -32,7 +32,7 @@ export default async function (pass, prompt, res) {
     // run prompt
     try {
         const completion = await openai.createCompletion({
-            model: "text-curie-001",
+            model: "text-davinci-003",
             prompt: prompt,
             temperature: 0.8,
             max_tokens: 300
