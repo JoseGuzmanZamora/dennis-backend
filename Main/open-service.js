@@ -32,7 +32,7 @@ export default async function (pass, prompt, res) {
     // run prompt
     try {
         const completion = await openai.createCompletion({
-            model: "text-davinci-003",
+            model: process.env.MODEL_TO_USE,
             prompt: prompt,
             temperature: 0.8,
             max_tokens: 300
@@ -41,8 +41,10 @@ export default async function (pass, prompt, res) {
     } catch(error) {
         if (error.response) {
             console.error(error.response.status, error.response.data);
+            res.status(error.response.status).json({ result: error.response.data });
         } else {
             console.error(`Error with OpenAI API request: ${error.message}`);
+            res.status(500);
         }
   }
 }
